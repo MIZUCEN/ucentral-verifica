@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Verificación de Autenticidad | Universidad Central de Chile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+}
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+h1 {
+    text-align: center;
+    color: #003366;
+}
+h2 {
+    text-align: center;
+    font-size: 16px;
+    margin-top: 0;
+}
+.box {
+    margin-top: 30px;
+    padding: 20px;
+    background: #fafafa;
+    border-left: 5px solid #003366;
+}
+.ok {
+    color: green;
+    font-weight: bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Universidad Central de Chile</h1>
+    <h2>Plataforma de Verificación de Documentos</h2>
+
+    <div class="box">
+        <p><strong>Código de verificación:</strong> <span id="codigo"></span></p>
+        <p><strong>Estado:</strong> <span class="ok">Documento auténtico</span></p>
+        <p><strong>Emitido por:</strong> Universidad Central de Chile</p>
+        <p><strong>Nombre del titular:</strong> <span id="nombre"></span></p>
+        <p><strong>Fecha de emisión:</strong> <span id="fecha"></span></p>
+    </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+document.getElementById("codigo").textContent = params.get("cod") || "—";
+document.getElementById("nombre").textContent = params.get("nom") || "—";
+document.getElementById("fecha").textContent = params.get("fec") || "—";
+</script>
+
+</body>
+</html>
