@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <title>Verificación de Autenticidad | Universidad Central (Ficticia)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="robots" content="noindex,nofollow" />
+  <meta charset="UTF-8">
+  <title>Verificación de Autenticidad | Universidad Central</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
   <link rel="icon" href="logo.png">
 
   <style>
@@ -12,14 +12,13 @@
       --primary:#0026FC;
       --primaryDark:#001BB8;
       --bg:#f2f2f2;
-      --card:#fff;
+      --card:#ffffff;
       --text:#0F172A;
       --muted:#475569;
       --border:#d9d9d9;
       --ok:#1e7e34;
       --bad:#b00020;
     }
-
     body{font-family:Arial,sans-serif;background:var(--bg);margin:0;color:var(--text);}
     .topbar{
       background:var(--primary);
@@ -57,7 +56,7 @@
 
     .data{margin-top:14px;font-size:15px;line-height:1.55;}
     .data p{margin:6px 0;}
-    .data strong{display:inline-block;width:190px;}
+    .data strong{display:inline-block;width:200px;}
 
     .legal{
       margin-top:28px;
@@ -73,39 +72,40 @@
 </head>
 
 <body>
-
+  <!-- Barra superior -->
   <div class="topbar">
-    <img src="logo.png" alt="Logo">
-    <div class="name">Universidad Central (Ficticia)</div>
+    <img src="logo.png" alt="Universidad Central">
+    <div class="name">Universidad Central</div>
   </div>
 
   <div class="container">
     <h1>Verificación de Autenticidad</h1>
-    <h2>Certificados y documentos (Ejemplo)</h2>
+    <h2>Certificados y documentos académicos</h2>
 
     <div class="box">
-      <div id="status" class="status-ok">✔ Documento válido (según datos del QR)</div>
+      <div id="status" class="status-ok">✔ Documento válido</div>
 
       <div class="data">
-        <p><strong>Institución:</strong> Universidad Central (Ficticia)</p>
-        <p><strong>Tipo de documento:</strong> <span id="doc">—</span></p>
-        <p><strong>Nombre del titular:</strong> <span id="nom">—</span></p>
-        <p><strong>RUT:</strong> <span id="rut">—</span></p>
-        <p><strong>Título / Programa:</strong> <span id="tit">—</span></p>
-        <p><strong>Fecha de emisión:</strong> <span id="fec">—</span></p>
-        <p><strong>Código de verificación:</strong> <span id="cod">—</span></p>
+        <p><strong>Institución:</strong> Universidad Central</p>
+        <p><strong>Tipo de documento:</strong> <span id="doc"></span></p>
+        <p><strong>Nombre del titular:</strong> <span id="nom"></span></p>
+        <p><strong>RUT:</strong> <span id="rut"></span></p>
+        <p><strong>Título / Programa:</strong> <span id="tit"></span></p>
+        <p><strong>Fecha de emisión:</strong> <span id="fec"></span></p>
+        <p><strong>Código de verificación:</strong> <span id="cod"></span></p>
       </div>
 
-      <div class="small" id="ts">—</div>
+      <div class="small" id="ts"></div>
     </div>
 
     <div class="legal">
-      <strong>Aviso:</strong> Este sitio y la información mostrada corresponden a un <strong>ejemplo ficticio</strong> para fines de demostración.
-      La validez indicada depende únicamente de los datos contenidos en el código QR utilizado en esta prueba.
+      Este sitio permite verificar la autenticidad de documentos mediante un código QR
+      asociado a los datos informados. La información mostrada corresponde a los parámetros
+      contenidos en el código de verificación consultado.
     </div>
 
     <footer>
-      © Universidad Central (Ficticia) – Sistema de Verificación Documental
+      © Universidad Central – Sistema de Verificación Documental
     </footer>
   </div>
 
@@ -114,20 +114,26 @@
     const get = (k) => (qs.get(k) || "").trim();
 
     const fields = ["doc","nom","rut","tit","fec","cod"];
-    for (const f of fields) {
+    let ok = true;
+
+    fields.forEach(f=>{
+      const v = get(f);
       const el = document.getElementById(f);
-      if (el) el.textContent = get(f) || "—";
-    }
+      if (v) {
+        el.textContent = v;
+      } else {
+        ok = false;
+        el.textContent = "";
+      }
+    });
 
     const now = new Date();
     document.getElementById("ts").textContent =
       "Consulta: " + now.toLocaleString("es-CL", { dateStyle:"full", timeStyle:"short" });
 
-    // Estado simple: si hay cod + nom + doc => “válido” (demo)
-    const ok = get("cod") && get("nom") && get("doc");
     const status = document.getElementById("status");
     if (!ok) {
-      status.textContent = "✖ Información insuficiente en el QR (ejemplo)";
+      status.textContent = "✖ Información no disponible";
       status.className = "status-bad";
     }
   </script>
