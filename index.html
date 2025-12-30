@@ -1,150 +1,135 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Verificación de Autenticidad | Universidad Central de Chile</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>Verificación de Autenticidad | Universidad Central (Ficticia)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow" />
+  <link rel="icon" href="logo.png">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f2f2f2;
-            margin: 0;
-        }
+  <style>
+    :root{
+      --primary:#0026FC;
+      --primaryDark:#001BB8;
+      --bg:#f2f2f2;
+      --card:#fff;
+      --text:#0F172A;
+      --muted:#475569;
+      --border:#d9d9d9;
+      --ok:#1e7e34;
+      --bad:#b00020;
+    }
 
-        /* Barra superior */
-        .topbar {
-            background: #003366;
-            padding: 14px 20px;
-            color: white;
-            display: flex;
-            align-items: center;
-        }
+    body{font-family:Arial,sans-serif;background:var(--bg);margin:0;color:var(--text);}
+    .topbar{
+      background:var(--primary);
+      padding:14px 20px;
+      color:#fff;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      border-bottom:4px solid var(--primaryDark);
+      box-shadow:0 6px 14px rgba(2,8,23,.12);
+    }
+    .topbar img{height:42px;}
+    .topbar .name{font-size:16px;font-weight:bold;}
 
-        .topbar img {
-            height: 42px;
-            margin-right: 14px;
-        }
+    .container{
+      max-width:780px;
+      margin:40px auto;
+      background:var(--card);
+      padding:35px;
+      border-radius:10px;
+      border:1px solid var(--border);
+    }
+    h1{text-align:center;color:var(--primaryDark);margin:10px 0 6px;}
+    h2{text-align:center;font-size:15px;color:#555;margin:0 0 18px;}
 
-        .topbar span {
-            font-size: 16px;
-            font-weight: bold;
-        }
+    .box{
+      margin-top:18px;
+      padding:20px;
+      background:#fafafa;
+      border-left:6px solid var(--primaryDark);
+      border-radius:8px;
+    }
+    .status-ok{color:var(--ok);font-weight:bold;font-size:15px;}
+    .status-bad{color:var(--bad);font-weight:bold;font-size:15px;}
 
-        /* Contenedor principal */
-        .container {
-            max-width: 760px;
-            margin: 40px auto;
-            background: white;
-            padding: 35px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-        }
+    .data{margin-top:14px;font-size:15px;line-height:1.55;}
+    .data p{margin:6px 0;}
+    .data strong{display:inline-block;width:190px;}
 
-        h1 {
-            text-align: center;
-            color: #003366;
-            margin-top: 10px;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 15px;
-            color: #555;
-            margin-top: 0;
-        }
-
-        .box {
-            margin-top: 30px;
-            padding: 20px;
-            background: #fafafa;
-            border-left: 5px solid #003366;
-        }
-
-        .status-ok {
-            color: #1e7e34;
-            font-weight: bold;
-        }
-
-        .status-warn {
-            color: #856404;
-            font-weight: bold;
-        }
-
-        .data {
-            margin-top: 15px;
-            font-size: 15px;
-        }
-
-        .data strong {
-            display: inline-block;
-            width: 180px;
-        }
-
-        /* Aviso legal */
-        .legal {
-            margin-top: 35px;
-            font-size: 12px;
-            color: #666;
-            border-top: 1px solid #ddd;
-            padding-top: 15px;
-            line-height: 1.5;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 12px;
-            color: #777;
-            margin-top: 30px;
-        }
-    </style>
+    .legal{
+      margin-top:28px;
+      font-size:12px;
+      color:#666;
+      border-top:1px solid #ddd;
+      padding-top:14px;
+      line-height:1.55;
+    }
+    footer{text-align:center;font-size:12px;color:#777;margin-top:24px;}
+    .small{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+  </style>
 </head>
 
 <body>
 
-    <!-- BARRA SUPERIOR -->
-    <div class="topbar">
-        <img src="logo.png" alt="Universidad Central de Chile">
-        <span>Universidad Central de Chile</span>
+  <div class="topbar">
+    <img src="logo.png" alt="Logo">
+    <div class="name">Universidad Central (Ficticia)</div>
+  </div>
+
+  <div class="container">
+    <h1>Verificación de Autenticidad</h1>
+    <h2>Certificados y documentos (Ejemplo)</h2>
+
+    <div class="box">
+      <div id="status" class="status-ok">✔ Documento válido (según datos del QR)</div>
+
+      <div class="data">
+        <p><strong>Institución:</strong> Universidad Central (Ficticia)</p>
+        <p><strong>Tipo de documento:</strong> <span id="doc">—</span></p>
+        <p><strong>Nombre del titular:</strong> <span id="nom">—</span></p>
+        <p><strong>RUT:</strong> <span id="rut">—</span></p>
+        <p><strong>Título / Programa:</strong> <span id="tit">—</span></p>
+        <p><strong>Fecha de emisión:</strong> <span id="fec">—</span></p>
+        <p><strong>Código de verificación:</strong> <span id="cod">—</span></p>
+      </div>
+
+      <div class="small" id="ts">—</div>
     </div>
 
-    <!-- CONTENIDO -->
-    <div class="container">
-
-        <h1>Verificación de Autenticidad</h1>
-        <h2>Certificados y documentos académicos</h2>
-
-        <div class="box">
-            <div class="status-ok">✔ Documento válido y registrado</div>
-
-            <div class="data">
-                <p><strong>Institución:</strong> Universidad Central de Chile</p>
-                <p><strong>Tipo de documento:</strong> Certificado Académico</p>
-                <p><strong>Nombre del titular:</strong> [Nombre del estudiante]</p>
-                <p><strong>RUT:</strong> [12.345.678-9]</p>
-                <p><strong>Fecha de emisión:</strong> [DD/MM/AAAA]</p>
-                <p><strong>Código de verificación:</strong> UCEN-2025-XXXXXX</p>
-            </div>
-        </div>
-
-        <!-- TEXTO LEGAL -->
-        <div class="legal">
-            Este sitio corresponde a una plataforma de verificación de autenticidad de documentos
-            emitidos por la Universidad Central de Chile.  
-            <br><br>
-            La validación se realiza mediante códigos únicos asociados a certificados digitales.
-            La información presentada confirma la existencia del documento en los registros
-            institucionales disponibles para fines de verificación.
-            <br><br>
-            Este sistema no reemplaza plataformas académicas internas ni entrega acceso a información
-            sensible protegida por normativa legal vigente.
-        </div>
-
-        <footer>
-            © Universidad Central de Chile – Sistema de Verificación Documental
-        </footer>
-
+    <div class="legal">
+      <strong>Aviso:</strong> Este sitio y la información mostrada corresponden a un <strong>ejemplo ficticio</strong> para fines de demostración.
+      La validez indicada depende únicamente de los datos contenidos en el código QR utilizado en esta prueba.
     </div>
 
+    <footer>
+      © Universidad Central (Ficticia) – Sistema de Verificación Documental
+    </footer>
+  </div>
+
+  <script>
+    const qs = new URLSearchParams(location.search);
+    const get = (k) => (qs.get(k) || "").trim();
+
+    const fields = ["doc","nom","rut","tit","fec","cod"];
+    for (const f of fields) {
+      const el = document.getElementById(f);
+      if (el) el.textContent = get(f) || "—";
+    }
+
+    const now = new Date();
+    document.getElementById("ts").textContent =
+      "Consulta: " + now.toLocaleString("es-CL", { dateStyle:"full", timeStyle:"short" });
+
+    // Estado simple: si hay cod + nom + doc => “válido” (demo)
+    const ok = get("cod") && get("nom") && get("doc");
+    const status = document.getElementById("status");
+    if (!ok) {
+      status.textContent = "✖ Información insuficiente en el QR (ejemplo)";
+      status.className = "status-bad";
+    }
+  </script>
 </body>
 </html>
