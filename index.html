@@ -39,8 +39,18 @@
       box-shadow: 0 6px 14px rgba(2,8,23,.12);
     }
 
-    .topbar img{
-      height: 42px;
+    .logo-box{
+      background:#fff;
+      padding:6px 10px;
+      border-radius:6px;
+      display:flex;
+      align-items:center;
+      box-shadow:0 2px 6px rgba(0,0,0,.15);
+    }
+
+    .logo-box img{
+      height:38px;
+      display:block;
     }
 
     .topbar .name{
@@ -133,9 +143,11 @@
 
 <body>
 
-  <!-- Barra superior con logo -->
+  <!-- Barra superior -->
   <div class="topbar">
-    <img src="./logo.png" alt="Universidad Central de Chile">
+    <div class="logo-box">
+      <img src="logo.png" alt="Universidad Central de Chile">
+    </div>
     <div class="name">Universidad Central de Chile</div>
   </div>
 
@@ -171,7 +183,7 @@
 
   <script>
     const qs = new URLSearchParams(window.location.search);
-    const get = (k) => (qs.get(k) || "").trim();
+    const get = k => (qs.get(k) || "").trim();
 
     const fields = ["doc","nom","rut","tit","fec","cod"];
     let completo = true;
@@ -179,24 +191,32 @@
     fields.forEach(f => {
       const v = get(f);
       const el = document.getElementById(f);
-      if (v) {
+      if(v){
         el.textContent = v;
-      } else {
+      }else{
         completo = false;
-        el.textContent = "";
+        el.textContent = "—";
       }
     });
+
+    /* Validación del patrón del código */
+    const codePattern = /^UCEN-TIT-\d{4}-\d{8}$/;
+    const cod = get("cod");
+
+    if(!codePattern.test(cod)){
+      completo = false;
+    }
+
+    const status = document.getElementById("status");
+    if(!completo){
+      status.textContent = "✖ Documento no válido";
+      status.className = "status-bad";
+    }
 
     const now = new Date();
     document.getElementById("ts").textContent =
       "Consulta realizada el " +
-      now.toLocaleString("es-CL", { dateStyle: "full", timeStyle: "short" });
-
-    const status = document.getElementById("status");
-    if (!completo) {
-      status.textContent = "✖ Información no disponible para este código";
-      status.className = "status-bad";
-    }
+      now.toLocaleString("es-CL", { dateStyle:"full", timeStyle:"short" });
   </script>
 
 </body>
