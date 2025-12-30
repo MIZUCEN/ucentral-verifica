@@ -1,65 +1,150 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Verificación de Autenticidad | Universidad Central de Chile</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background: #f2f2f2;
-    margin: 0;
-}
-.container {
-    max-width: 700px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-h1 {
-    text-align: center;
-    color: #003366;
-}
-h2 {
-    text-align: center;
-    font-size: 16px;
-    margin-top: 0;
-}
-.box {
-    margin-top: 30px;
-    padding: 20px;
-    background: #fafafa;
-    border-left: 5px solid #003366;
-}
-.ok {
-    color: green;
-    font-weight: bold;
-}
-</style>
+    <meta charset="UTF-8">
+    <title>Verificación de Autenticidad | Universidad Central de Chile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+        }
+
+        /* Barra superior */
+        .topbar {
+            background: #003366;
+            padding: 14px 20px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .topbar img {
+            height: 42px;
+            margin-right: 14px;
+        }
+
+        .topbar span {
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 760px;
+            margin: 40px auto;
+            background: white;
+            padding: 35px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        h1 {
+            text-align: center;
+            color: #003366;
+            margin-top: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 15px;
+            color: #555;
+            margin-top: 0;
+        }
+
+        .box {
+            margin-top: 30px;
+            padding: 20px;
+            background: #fafafa;
+            border-left: 5px solid #003366;
+        }
+
+        .status-ok {
+            color: #1e7e34;
+            font-weight: bold;
+        }
+
+        .status-warn {
+            color: #856404;
+            font-weight: bold;
+        }
+
+        .data {
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+        .data strong {
+            display: inline-block;
+            width: 180px;
+        }
+
+        /* Aviso legal */
+        .legal {
+            margin-top: 35px;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 15px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            font-size: 12px;
+            color: #777;
+            margin-top: 30px;
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Universidad Central de Chile</h1>
-    <h2>Plataforma de Verificación de Documentos</h2>
-
-    <div class="box">
-        <p><strong>Código de verificación:</strong> <span id="codigo"></span></p>
-        <p><strong>Estado:</strong> <span class="ok">Documento auténtico</span></p>
-        <p><strong>Emitido por:</strong> Universidad Central de Chile</p>
-        <p><strong>Nombre del titular:</strong> <span id="nombre"></span></p>
-        <p><strong>Fecha de emisión:</strong> <span id="fecha"></span></p>
+    <!-- BARRA SUPERIOR -->
+    <div class="topbar">
+        <img src="logo.png" alt="Universidad Central de Chile">
+        <span>Universidad Central de Chile</span>
     </div>
-</div>
 
-<script>
-const params = new URLSearchParams(window.location.search);
-document.getElementById("codigo").textContent = params.get("cod") || "—";
-document.getElementById("nombre").textContent = params.get("nom") || "—";
-document.getElementById("fecha").textContent = params.get("fec") || "—";
-</script>
+    <!-- CONTENIDO -->
+    <div class="container">
+
+        <h1>Verificación de Autenticidad</h1>
+        <h2>Certificados y documentos académicos</h2>
+
+        <div class="box">
+            <div class="status-ok">✔ Documento válido y registrado</div>
+
+            <div class="data">
+                <p><strong>Institución:</strong> Universidad Central de Chile</p>
+                <p><strong>Tipo de documento:</strong> Certificado Académico</p>
+                <p><strong>Nombre del titular:</strong> [Nombre del estudiante]</p>
+                <p><strong>RUT:</strong> [12.345.678-9]</p>
+                <p><strong>Fecha de emisión:</strong> [DD/MM/AAAA]</p>
+                <p><strong>Código de verificación:</strong> UCEN-2025-XXXXXX</p>
+            </div>
+        </div>
+
+        <!-- TEXTO LEGAL -->
+        <div class="legal">
+            Este sitio corresponde a una plataforma de verificación de autenticidad de documentos
+            emitidos por la Universidad Central de Chile.  
+            <br><br>
+            La validación se realiza mediante códigos únicos asociados a certificados digitales.
+            La información presentada confirma la existencia del documento en los registros
+            institucionales disponibles para fines de verificación.
+            <br><br>
+            Este sistema no reemplaza plataformas académicas internas ni entrega acceso a información
+            sensible protegida por normativa legal vigente.
+        </div>
+
+        <footer>
+            © Universidad Central de Chile – Sistema de Verificación Documental
+        </footer>
+
+    </div>
 
 </body>
 </html>
