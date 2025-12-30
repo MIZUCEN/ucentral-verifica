@@ -19,60 +19,121 @@
       --ok:#1e7e34;
       --bad:#b00020;
     }
-    body{font-family:Arial,sans-serif;background:var(--bg);margin:0;color:var(--text);}
-    .topbar{
-      background:var(--primary);
-      padding:14px 20px;
-      color:#fff;
-      display:flex;
-      align-items:center;
-      gap:14px;
-      border-bottom:4px solid var(--primaryDark);
-      box-shadow:0 6px 14px rgba(2,8,23,.12);
-    }
-    .topbar img{height:42px;}
-    .topbar .name{font-size:16px;font-weight:bold;}
 
-    .container{
-      max-width:780px;
-      margin:40px auto;
-      background:var(--card);
-      padding:35px;
-      border-radius:10px;
-      border:1px solid var(--border);
+    body{
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      margin: 0;
+      color: var(--text);
     }
-    h1{text-align:center;color:var(--primaryDark);margin:10px 0 6px;}
-    h2{text-align:center;font-size:15px;color:#555;margin:0 0 18px;}
+
+    /* Barra superior */
+    .topbar{
+      background: var(--primary);
+      padding: 14px 20px;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border-bottom: 4px solid var(--primaryDark);
+      box-shadow: 0 6px 14px rgba(2,8,23,.12);
+    }
+
+    .topbar img{
+      height: 42px;
+    }
+
+    .topbar .name{
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    /* Contenedor */
+    .container{
+      max-width: 780px;
+      margin: 40px auto;
+      background: var(--card);
+      padding: 35px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    h1{
+      text-align: center;
+      color: var(--primaryDark);
+      margin: 10px 0 6px;
+    }
+
+    h2{
+      text-align: center;
+      font-size: 15px;
+      color: #555;
+      margin: 0 0 18px;
+    }
 
     .box{
-      margin-top:18px;
-      padding:20px;
-      background:#fafafa;
-      border-left:6px solid var(--primaryDark);
-      border-radius:8px;
+      margin-top: 18px;
+      padding: 20px;
+      background: #fafafa;
+      border-left: 6px solid var(--primaryDark);
+      border-radius: 8px;
     }
-    .status-ok{color:var(--ok);font-weight:bold;font-size:15px;}
-    .status-bad{color:var(--bad);font-weight:bold;font-size:15px;}
 
-    .data{margin-top:14px;font-size:15px;line-height:1.55;}
-    .data p{margin:6px 0;}
-    .data strong{display:inline-block;width:200px;}
+    .status-ok{
+      color: var(--ok);
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .status-bad{
+      color: var(--bad);
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .data{
+      margin-top: 14px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .data p{
+      margin: 6px 0;
+    }
+
+    .data strong{
+      display: inline-block;
+      width: 210px;
+    }
 
     .legal{
-      margin-top:28px;
-      font-size:12px;
-      color:#666;
-      border-top:1px solid #ddd;
-      padding-top:14px;
-      line-height:1.55;
+      margin-top: 28px;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #ddd;
+      padding-top: 14px;
+      line-height: 1.55;
     }
-    footer{text-align:center;font-size:12px;color:#777;margin-top:24px;}
-    .small{font-size:12px;color:var(--muted);text-align:center;margin-top:8px}
+
+    footer{
+      text-align: center;
+      font-size: 12px;
+      color: #777;
+      margin-top: 24px;
+    }
+
+    .small{
+      font-size: 12px;
+      color: var(--muted);
+      text-align: center;
+      margin-top: 8px;
+    }
   </style>
 </head>
 
 <body>
-  <!-- Barra superior -->
+
+  <!-- Barra superior con logo -->
   <div class="topbar">
     <img src="logo.png" alt="Universidad Central">
     <div class="name">Universidad Central</div>
@@ -99,9 +160,8 @@
     </div>
 
     <div class="legal">
-      Este sitio permite verificar la autenticidad de documentos mediante un código QR
-      asociado a los datos informados. La información mostrada corresponde a los parámetros
-      contenidos en el código de verificación consultado.
+      Este sistema permite verificar la autenticidad de documentos mediante un código QR
+      asociado a los datos contenidos en el certificado consultado.
     </div>
 
     <footer>
@@ -110,32 +170,34 @@
   </div>
 
   <script>
-    const qs = new URLSearchParams(location.search);
+    const qs = new URLSearchParams(window.location.search);
     const get = (k) => (qs.get(k) || "").trim();
 
     const fields = ["doc","nom","rut","tit","fec","cod"];
-    let ok = true;
+    let completo = true;
 
-    fields.forEach(f=>{
+    fields.forEach(f => {
       const v = get(f);
       const el = document.getElementById(f);
       if (v) {
         el.textContent = v;
       } else {
-        ok = false;
+        completo = false;
         el.textContent = "";
       }
     });
 
     const now = new Date();
     document.getElementById("ts").textContent =
-      "Consulta: " + now.toLocaleString("es-CL", { dateStyle:"full", timeStyle:"short" });
+      "Consulta realizada el " +
+      now.toLocaleString("es-CL", { dateStyle: "full", timeStyle: "short" });
 
     const status = document.getElementById("status");
-    if (!ok) {
-      status.textContent = "✖ Información no disponible";
+    if (!completo) {
+      status.textContent = "✖ Información no disponible para este código";
       status.className = "status-bad";
     }
   </script>
+
 </body>
 </html>
